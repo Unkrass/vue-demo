@@ -10,15 +10,18 @@ afterEach(() => {
   server.shutdown();
 });
 
-it("shows the users from our server", () => {
+it("shows the arenas from our server", () => {
   server.logging = true;
   server.db.loadData({
-    todos: [{ text: "Buy groceries", isDone: false }]
+    arenas: [{
+      'id': 3,
+      'name': 'New stadium',
+      'city': 'Hamburg',
+      'state': 'Germany'
+    }]
   });
 
   cy.visit("/");
 
-  cy.get('[data-testid="Buy groceries"]')
-    .get("input")
-    .should("not.value", "Buy groceries");
+  cy.get('#arena-1')
 });

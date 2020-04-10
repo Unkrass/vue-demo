@@ -4,7 +4,9 @@
       <div>
         <h1 class="text-2xl font-bold">Arenas</h1>
         <div>2 Arenas should appear here:</div>
-        <div v-for="arena in arenas" :key="arena.id"></div>
+        <div v-for="arena in arenas" :key="arena.id">
+          <span :id="'arena-' + arena.id">{{arena.name}}</span>
+        </div>
       </div>
     </div>
     <div style="margin-top: 30px;">And this button outputs the login response:</div>
