@@ -8,12 +8,6 @@
           exact-active-class="border-b-2 border-gray-700"
           >Home</router-link
         >
-        <router-link
-          to="/about"
-          class="pb-1"
-          active-class="border-b-2 border-gray-700"
-          >About</router-link
-        >
       </header>
 
       <router-view></router-view>

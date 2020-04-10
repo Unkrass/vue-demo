@@ -1,46 +1,43 @@
-import { Server } from "miragejs";
+import { Server, Model } from 'miragejs'
 
-export function makeServer({ environment = "development" } = {}) {
+export function makeServer({ environment = 'development' } = {}) {
   let server = new Server({
     environment,
 
+    models: {
+      arena: Model,
+    },
+
     seeds(server) {
-      server.db.loadData({
-        todos: [
-          { text: "Buy groceries", isDone: false },
-          { text: "Walk the dog", isDone: false },
-          { text: "Do laundry", isDone: false }
-        ]
-      });
+      server.create('arena', {
+        'id': 1,
+        'name': 'Millerntorstadion',
+        'city': 'Hamburg',
+        'state': 'Germany'
+      })
+      server.create('arena', {
+        'id': 2,
+        'name': 'Barclaycard Arena',
+        'city': 'Hamburg',
+        'state': 'Germany'
+      })
     },
 
     routes() {
-      this.namespace = "api";
-      this.timing = 750;
+      this.urlPrefix = 'http://localhost:8090'
+      this.namespace = ''
 
-      this.get("/todos", ({ db }) => {
-        return db.todos;
-      });
+      /* Login */
+      this.post('/oauth/token', () => {
+        return { 'access_token': 'abcd123456789', 'token_type': 'bearer', 'refresh_token': 'efgh123456789', 'expires_in': 43199, 'scope': 'ppvoting'}
+      })
 
-      this.patch("/todos/:id", (schema, request) => {
-        let todo = JSON.parse(request.requestBody).data;
-
-        return schema.db.todos.update(todo.id, todo);
-      });
-
-      this.post("/todos", (schema, request) => {
-        let todo = JSON.parse(request.requestBody).data;
-
-        return schema.db.todos.insert(todo);
-      });
-
-      this.delete("/todos/:id", (schema, request) => {
-        return schema.db.todos.remove(request.params.id);
-      });
+      /* Arenas */
+      this.get('/events/arenas', (schema) => {
+        return schema.arenas.all()
+      })
     }
-  });
+  })
 
-  window.server = server;
-
-  return server;
+  return server
 }

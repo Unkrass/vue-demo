@@ -3,14 +3,12 @@ import VueRouter from "vue-router";
 import App from "./App.vue";
 import { makeServer } from "./server";
 import { Server, Response } from "miragejs";
-import Todos from "./components/Todos";
-import About from "./components/About";
+import Arenas from "./components/Arenas";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
 if (window.Cypress) {
-  // mirage cypress/test server
   new Server({
     environment: "test",
     routes() {
@@ -31,8 +29,7 @@ if (window.Cypress) {
 const router = new VueRouter({
   mode: "history",
   routes: [
-    { path: "/", component: Todos },
-    { path: "/about", component: About }
+    { path: "/", component: Arenas },
   ]
 });
 
