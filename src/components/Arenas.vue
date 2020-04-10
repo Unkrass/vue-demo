@@ -4,14 +4,14 @@
       <div>
         <h1 class="text-2xl font-bold">Arenas</h1>
         <div>2 Arenas should appear here:</div>
-        <div v-for="arena in arenas" :key="arena.id">
-          <span :id="'arena-' + arena.id">{{arena.name}}</span>
-        </div>
+        <span v-for="arena in arenas" :key="arena.id">{{arena.name}}</span>
       </div>
     </div>
     <div style="margin-top: 30px;">And this button outputs the login response:</div>
     <div>
-      <button class="btn btn-blue" @click="login()">Post Login Response to Console</button>
+      <button class="btn btn-blue" @click="login()" data-test-login-button>
+        Post Login Response to Console
+      </button>
     </div>
   </div>
 </template>

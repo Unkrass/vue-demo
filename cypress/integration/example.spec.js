@@ -22,6 +22,5 @@ it("shows the arenas from our server", () => {
   });
 
   cy.visit("/");
-
-  cy.get('#arena-1')
+  cy.get('[data-test-login-button]').click()
 });
