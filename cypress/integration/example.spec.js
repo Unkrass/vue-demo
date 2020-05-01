@@ -4,6 +4,7 @@ let server;
 
 beforeEach(() => {
   server = makeServer({ environment: "test" });
+  cy.loginAsUser()
 });
 
 afterEach(() => {
